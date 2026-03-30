@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather app - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .login-container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            overflow: hidden;
+            position: relative;
+        }
+        .login-card {
+            width: 440px;
+            padding: 56px;
+            background: #ffffff;
+            border-radius: 48px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            z-index: 10;
+        }
+        .input-group {
+            display: flex; flex-direction: column; gap: 8px;
+        }
+        .input-field {
+            background: #f1f5f9;
+            border: 1px solid transparent;
+            padding: 18px 24px;
+            border-radius: 20px;
+            color: #1e293b;
+            font-family: 'Inter';
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            background: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 4px 20px rgba(14, 165, 233, 0.1);
+        }
+        .login-btn {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 20px;
+            border-radius: 99px;
+            font-family: 'Space Grotesk';
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .login-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(14, 165, 233, 0.3);
+            filter: brightness(1.1);
+        }
+        .switch-auth { text-align: center; font-size: 0.875rem; color: #64748b; }
+        .switch-auth a { color: var(--primary); text-decoration: none; font-weight: 600; }
+        .mesh-bg { position: absolute; width: 100%; height: 100%; filter: blur(120px); z-index: 1; opacity: 0.5; }
+        .mesh-circle { position: absolute; border-radius: 50%; opacity: 0.2; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="mesh-bg">
+            <div class="mesh-circle" style="width: 600px; height: 600px; top: -100px; left: -100px; background: #0ea5e9;"></div>
+            <div class="mesh-circle" style="width: 500px; height: 500px; bottom: -50px; right: -50px; background: #6366f1;"></div>
+        </div>
+
+        <div class="login-card">
+            <div style="text-align: center;">
+                <div class="logo" style="font-size: 3rem;">Weather app</div>
+                <p class="metric-label" style="margin-top: 12px; color: #64748b; font-weight: 500;">Sophisticated Atmospheric Tracking</p>
+            </div>
+
+            <div id="auth-form" style="display: flex; flex-direction: column; gap: 24px;">
+                <div class="input-group">
+                    <label class="widget-title" style="font-size: 0.65rem; color: #94a3b8;">Email Address</label>
+                    <input type="email" id="email" class="input-field" placeholder="your@email.com">
+                </div>
+                <div class="input-group">
+                    <label class="widget-title" style="font-size: 0.65rem; color: #94a3b8;">Password</label>
+                    <input type="password" id="password" class="input-field" placeholder="••••••••">
+                </div>
+                <button class="login-btn" id="submit-btn" onclick="handleAuth()">Sign In</button>
+            </div>
+
+            <div class="switch-auth">
+                <span id="switch-text">New to the app?</span> 
+                <a href="#" id="switch-link" onclick="toggleAuth(event)">Create account</a>
+            </div>
+
+            <p id="error-msg" style="color: #ef4444; font-size: 0.75rem; text-align: center; display: none;"></p>
+        </div>
+    </div>
+
+    <!-- SDK Import in module script is needed because firebase-config is a module -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        
+        // Use the config directly from the user's saved file or a mirror
+        // Since we can't easily import from the current user-edited file if it's not a proper web module path, 
+        // we'll define the config here based on the viewed file
+        const firebaseConfig = {
+          apiKey: "AIzaSyD0QtiObl0f9n5VWpDLp0toFqH5j8gJNpU",
+          authDomain: "new1-2920e.firebaseapp.com",
+          projectId: "new1-2920e",
+          storageBucket: "new1-2920e.firebasestorage.app",
+          messagingSenderId: "352318886984",
+          appId: "1:352318886984:web:e610fdda94c2b5097af47d",
+          measurementId: "G-V9HQ7NRYKG"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        let isLogin = true;
+
+        window.toggleAuth = (e) => {
+            e.preventDefault();
+            isLogin = !isLogin;
+            document.getElementById('submit-btn').textContent = isLogin ? 'Sign In' : 'Sign Up';
+            document.getElementById('switch-text').textContent = isLogin ? "New to the app?" : "Already a member?";
+            document.getElementById('switch-link').textContent = isLogin ? 'Create account' : 'Sign in instead';
+        };
+
+        window.handleAuth = async () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('error-msg');
+            errorMsg.style.display = 'none';
+
+            try {
+                if (isLogin) {
+                    await signInWithEmailAndPassword(auth, email, password);
+                } else {
+                    await createUserWithEmailAndPassword(auth, email, password);
+                }
+                window.location.href = 'index.html';
+            } catch (err) {
+                errorMsg.textContent = err.message;
+                errorMsg.style.display = 'block';
+            }
+        };
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

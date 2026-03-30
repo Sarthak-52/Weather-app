@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather app - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="logo">Weather app</div>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-item active">Dashboard</a>
+                <a href="forecast.html" class="nav-item">Forecast</a>
+                <a href="locations.html" class="nav-item">Locations</a>
+                <a href="maps.html" class="nav-item">Maps</a>
+            </nav>
+            
+            <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px;">
+                <p style="font-size: 0.75rem; color: var(--on-surface-variant); padding: 0 24px;">Made by Sarthak</p>
+                <button onclick="handleSignOut()" class="nav-item" style="padding: 12px 24px; font-size: 0.875rem; background: none; border: none; color: #ef4444; width: 100%; text-align: left; cursor: pointer;">Sign Out</button>
+            </div>
+        </aside>
+
+        <main class="content">
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 16px;">
+                <input type="text" id="city-search" placeholder="Search City..." class="nav-item glass" style="width: 320px; border-radius: 99px; background: rgba(255,255,255,0.03);">
+            </div>
+
+            <header class="hero">
+                <div class="hero-info">
+                    <p class="metric-label" id="current-location">Syncing state...</p>
+                    <h1 class="hero-temp" id="current-temp">--°C</h1>
+                    <p class="label" id="weather-desc" style="font-size: 1.25rem; font-weight: 500; opacity: 0.8;">Analyzing atmosphere...</p>
+                    
+                    <div style="display: flex; gap: 32px; margin-top: 48px;">
+                        <div>
+                            <p class="widget-title" style="font-size: 0.65rem;">Feels Like</p>
+                            <p class="widget-value" id="feels-like-val" style="font-size: 1.5rem;">26°C</p>
+                        </div>
+                        <div>
+                            <p class="widget-title" style="font-size: 0.65rem;">Day Range</p>
+                            <p class="widget-value" id="temp-range-val" style="font-size: 1.5rem;">21° / 28°</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="hero-icon">
+                    <svg width="160" height="160" viewBox="0 0 24 24" fill="var(--tertiary)" style="filter: drop-shadow(0 0 40px rgba(251, 191, 36, 0.4));">
+                        <path d="M12,7L12.91,8.91L15,9.82L12.91,10.73L12,12.82L11.09,10.73L9,9.82L11.09,8.91L12,7M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z" />
+                    </svg>
+                </div>
+            </header>
+
+            <section class="widgets-grid">
+                <div class="widget-card">
+                    <span class="widget-title">Humidity</span>
+                    <span class="widget-value" id="humidity-val">68%</span>
+                    <div style="height: 4px; background: rgba(255,255,255,0.05); border-radius: 99px; margin-top: 12px; overflow: hidden;">
+                        <div style="width: 68%; height: 100%; background: var(--primary); border-radius: 99px; box-shadow: 0 0 10px var(--primary);"></div>
+                    </div>
+                </div>
+                <div class="widget-card">
+                    <span class="widget-title">Wind</span>
+                    <span class="widget-value" id="wind-val">12 km/h</span>
+                    <span class="metric-label" style="font-size: 0.65rem;">North-East Direction</span>
+                </div>
+                <div class="widget-card">
+                    <span class="widget-title">Atmosphere</span>
+                    <span class="widget-value" id="pressure-val">1013 hPa</span>
+                    <span class="metric-label" style="font-size: 0.65rem;">Standard Pressure</span>
+                </div>
+                <div class="widget-card">
+                    <span class="widget-title">Visibility</span>
+                    <span class="widget-value" id="vis-val">10 km</span>
+                    <span class="metric-label" style="font-size: 0.65rem;">Clear Visibility</span>
+                </div>
+                <div class="widget-card">
+                    <span class="widget-title">UV Index</span>
+                    <span class="widget-value" id="uv-val">4 Moderate</span>
+                    <span class="metric-label" style="font-size: 0.65rem; color: var(--tertiary);">Medium Exposure</span>
+                </div>
+                <div class="widget-card" style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(129, 140, 248, 0.1));">
+                    <span class="widget-title">Air Quality</span>
+                    <span class="widget-value" id="aqi-val">--</span>
+                    <span class="metric-label" style="font-size: 0.65rem;">Clear & Healthy</span>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather app - Forecast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="logo">Weather app</div>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-item">Dashboard</a>
+                <a href="forecast.html" class="nav-item active">Forecast</a>
+                <a href="locations.html" class="nav-item">Locations</a>
+                <a href="maps.html" class="nav-item">Maps</a>
+            </nav>
+            <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px;">
+                <p style="font-size: 0.75rem; color: var(--on-surface-variant); padding: 0 24px;">Made by Sarthak</p>
+                <button onclick="handleSignOut()" class="nav-item" style="padding: 12px 24px; font-size: 0.875rem; background: none; border: none; color: #ef4444; width: 100%; text-align: left; cursor: pointer;">Sign Out</button>
+            </div>
+        </aside>
+
+        <main class="content">
+            <header>
+                <h2 class="logo" style="font-size: 2rem;">Weekly Outlook</h2>
+                <p class="metric-label">Extended 7-day atmospheric projection</p>
+            </header>
+
+            <section class="forecast-grid" id="forecast-container">
+                <div style="padding: 100px; text-align: center; font-family: 'Space Grotesk'; opacity: 0.5;">
+                    Analyzing atmospheric trends...
+                </div>
+            </section>
+        </main>
+    </div>
+    <script type="module" src="app.js"></script>
+</body>
+</html>

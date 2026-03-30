@@ -1,0 +1,12 @@
+{
+  "name": "aura-weather",
+  "version": "1.0.0",
+  "description": "Atmospheric Editorial Weather Application",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx vite"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
