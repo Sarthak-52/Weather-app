@@ -2,7 +2,7 @@
 
 A premium, modern weather dashboard designed with high-end aesthetics, glassmorphism, and real-time data integration. This application provides a comprehensive atmospheric overview with a focus on visual excellence and user experience.
 
-![Weather App Dashboard](https://raw.githubusercontent.com/Sarthak-52/Weather-app/main/screenshot.png) *(Note: Placeholder for actual screenshot)*
+
 
 ## ✨ Features
 
