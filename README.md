@@ -46,9 +46,7 @@ A premium, modern weather dashboard designed with high-end aesthetics, glassmorp
    npx serve .
    ```
 
-## 📸 Screenshots
 
-*(Add your screenshots here)*
 
 ## 👤 Author
 
