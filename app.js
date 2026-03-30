@@ -1,4 +1,4 @@
-const API_KEY = '25bda45833874d0550a3df1c02095de5'; // OpenWeatherMap API Key
+const API_KEY = '25bda456456874dfge5tg5yyh5e4'; // OpenWeatherMap API Key
 const DEFAULT_CITY = 'Mathura';
 
 // Firebase Stub - Only required for index.html context
